@@ -82,11 +82,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn[aria-disabled="true"] { cursor: default; }
 .btn small { font: 500 0.72rem/1 var(--mono); opacity: 0.8; }
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 18px; max-width: 760px; }
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 18px; max-width: 940px; }
 .stats div { background: color-mix(in srgb, var(--panel) 92%, transparent); padding: 16px 18px; display: grid; gap: 4px; }
 .stats b { font: 700 1.7rem/1 var(--display); font-variant-numeric: tabular-nums; }
 .stats span { color: var(--mute); font-size: 0.86rem; }
-@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stats .dl { grid-column: 1 / -1; } }
+.stats .dl b { color: var(--accent, #d35f12); }
+.stats .dl a { color: inherit; text-decoration: none; display: grid; gap: 4px; }
+.stats .dl span i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2fbf5b; margin-right: 6px; vertical-align: 1px; box-shadow: 0 0 0 0 rgba(47,191,91,.6); animation: dlpulse 2s infinite; }
+@keyframes dlpulse { 70% { box-shadow: 0 0 0 6px rgba(47,191,91,0); } 100% { box-shadow: 0 0 0 0 rgba(47,191,91,0); } }
+@media (prefers-reduced-motion: reduce) { .stats .dl span i { animation: none; } }
 
 /* ---- tier ladder */
 .ladder { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); }
@@ -207,7 +212,7 @@ footer .wrap { display: grid; gap: 8px; }
     <h1 id="hero-title">From a flint fire to the <span>Singularity</span>.</h1>
     <p class="lede">A long-haul tech progression pack in the tradition of GregTech: New Horizons. Climb sixteen ages of human history and beyond, from the Stone Age to MAX voltage. Each age is opened by killing the boss that guards it, in a lair built for that boss alone.</p>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/xSilentPhantomx/Age-Of-The-Singularity" download="AgeOfTheSingularity-beta-1.0.0.zip">Download <small>beta 1.0.0 · .zip</small></a>
+      <a class="btn primary" href="https://www.curseforge.com/minecraft/modpacks/age-of-the-singularity" target="_blank" rel="noopener">Download <small>on CurseForge</small></a>
       <a class="btn" href="#install">How to install</a>
       <a class="btn" href="https://discord.gg/pVASc8rFQA" target="_blank" rel="noopener">Join the Discord</a>
     </div>
@@ -215,7 +220,8 @@ footer .wrap { display: grid; gap: 8px; }
       <div role="listitem"><b>16</b><span>ages, Stone to MAX</span></div>
       <div role="listitem"><b>1,723</b><span>quests</span></div>
       <div role="listitem"><b>15</b><span>boss lairs</span></div>
-      <div role="listitem"><b>233</b><span>mods</span></div>
+      <div role="listitem"><b>232</b><span>mods</span></div>
+      <div role="listitem" class="dl"><a href="https://www.curseforge.com/minecraft/modpacks/age-of-the-singularity" target="_blank" rel="noopener"><b id="dl-count" aria-live="polite">…</b><span><i aria-hidden="true"></i>downloads on CurseForge</span></a></div>
     </div>
   </div>
 </section>
@@ -320,11 +326,10 @@ footer .wrap { display: grid; gap: 8px; }
     <div class="two">
       <div>
         <ol class="steps">
-          <li><div><b>Install Prism Launcher</b><p>The pack is built and tested on Prism Launcher. Any launcher that imports a Forge instance should work.</p></div></li>
+          <li><div><b>Get a launcher</b><p>Use the <a href="https://www.curseforge.com/download/app" target="_blank" rel="noopener">CurseForge app</a> or <a href="https://prismlauncher.org/" target="_blank" rel="noopener">Prism Launcher</a>. The pack is built and tested on Prism.</p></div></li>
           <li><div><b>Install Java 17</b><p>Minecraft 1.20.1 with Forge needs Java 17. In Prism, set it under <kbd>Settings → Java</kbd>.</p></div></li>
-          <li id="download"><div><b>Download the pack</b><p>Download the public beta: <a href="https://github.com/xSilentPhantomx/Age-Of-The-Singularity" download="AgeOfTheSingularity-beta-1.0.0.zip"><code>AgeOfTheSingularity-beta-1.0.0.zip</code></a>. The download starts right away; keep the file zipped, since Prism imports the .zip directly.</p><p><a class="btn primary" href="https://github.com/xSilentPhantomx/Age-Of-The-Singularity" download="AgeOfTheSingularity-beta-1.0.0.zip">Download beta 1.0.0 <small>.zip</small></a></p></div></li>
-          <li><div><b>Import it</b><p>In Prism, choose <kbd>Add Instance → Import</kbd> and pick the downloaded file.</p></div></li>
-          <li><div><b>Give it 8 GB of memory</b><p>Open the instance's <kbd>Edit → Settings → Java</kbd> and set both minimum and maximum memory to 8000 MB, the amount the pack is built with.</p></div></li>
+          <li id="download"><div><b>Install the pack</b><p><strong>CurseForge app:</strong> search for <code>Age of the Singularity</code> and click <kbd>Install</kbd>.</p><p><strong>Prism Launcher:</strong> choose <kbd>Add Instance → CurseForge</kbd>, search for <code>Age of the Singularity</code>, and install it. All the mods download automatically.</p><p><a class="btn primary" href="https://www.curseforge.com/minecraft/modpacks/age-of-the-singularity" target="_blank" rel="noopener">Get it on CurseForge</a></p></div></li>
+          <li><div><b>Give it 8 GB of memory</b><p>Open the instance's <kbd>Edit → Settings → Java</kbd> and set the maximum memory to 8192 MB (8 GB), the amount the pack is built with. A PC with 16 GB of RAM is recommended.</p></div></li>
           <li><div><b>Play, and open the quest book</b><p>Start a new world. The first chapter, the Stone Age, begins under the forest canopy with no iron at all.</p></div></li>
         </ol>
       </div>
@@ -484,4 +489,34 @@ footer .wrap { display: grid; gap: 8px; }
 })();
 </script>
 
+
+<script>
+// Live CurseForge download counter (public CFWidget API: no key needed). Refreshes every 5 minutes.
+(function () {
+  var el = document.getElementById('dl-count');
+  if (!el) return;
+  var API = 'https://api.cfwidget.com/minecraft/modpacks/age-of-the-singularity';
+  var shown = -1;
+  function show(n) {
+    if (shown < 0 || n <= shown) { el.textContent = n.toLocaleString(); shown = n; return; }
+    var from = shown, t0 = performance.now();          // count up to the new number
+    (function step(t) { var k = Math.min(1, (t - t0) / 900);
+      el.textContent = Math.round(from + (n - from) * k).toLocaleString();
+      if (k < 1) requestAnimationFrame(step); else shown = n; })(t0);
+  }
+  function load(retry) {
+    fetch(API, { cache: 'no-store' }).then(function (r) {
+      if (r.status === 202 && retry) { setTimeout(function () { load(false); }, 15000); return null; } // still being indexed
+      return r.ok ? r.json() : null;
+    }).then(function (j) {
+      if (!j) { if (shown < 0) el.textContent = '—'; return; }
+      var d = j.downloads, n = typeof d === 'number' ? d : (d && (d.total != null ? d.total : null));
+      if (n == null) { if (shown < 0) el.textContent = '—'; return; }
+      show(Number(n));
+    }).catch(function () { if (shown < 0) el.textContent = '—'; });
+  }
+  load(true);
+  setInterval(function () { load(false); }, 300000);
+})();
+</script>
 </body></html>
